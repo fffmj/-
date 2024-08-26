@@ -11,6 +11,7 @@ import com.example.uesr.req.UserSaveReq;
 import com.example.uesr.resp.PageResp;
 import com.example.uesr.service.UserService;
 import com.example.uesr.utils.CopyUtil;
+import com.example.uesr.utils.second;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import com.example.uesr.utils.SnowFlake;
@@ -25,6 +26,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 
     @Resource
     private SnowFlake snowFlake;
+
+    private final second idGenerator = new second();
 
     @Override
     public PageResp<UserEntity> getList(UserRep userRep) {
@@ -59,7 +62,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     public void save(UserSaveReq req1) {
         UserEntity entity = CopyUtil.copy(req1, UserEntity.class);
         if (ObjectUtils.isEmpty(req1.getId())){
-            entity.setId(snowFlake.nextId());
+            entity.setId(idGenerator.nextId());
             userMapper.insert(entity);
         }else{
             userMapper.updateById(entity);

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @TableName("user")
 public class UserEntity {
 
-    private Long id;
+    private int id;
 
     private String name;
 
@@ -18,11 +18,11 @@ public class UserEntity {
     private String city;
 
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
